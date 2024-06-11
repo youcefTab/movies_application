@@ -1,1 +1,15 @@
 Generic single-database configuration.
+
+# To generate new migration:
+
+# Go to dev_scripts/docker, run: docker-compose down -v
+# Then restart the database with --build to insure your local database is brand new ! you can stop it just after it's done
+
+
+# Go to folder movies_application/backend_project and run: sh dev_scripts/utils/init_test_environnement.sh
+# This will create a .local.env file with the DB_HOST in it
+
+# Do in your teminal : export DB_HOST=172.168.0.2 ( whatever the IP is in your .local.env )
+# Do the Same for DB_NAME, DB_USER and DB_PASSWORD that are in .env file
+
+# Then run : alembic revision --autogenerate -m "your message"
