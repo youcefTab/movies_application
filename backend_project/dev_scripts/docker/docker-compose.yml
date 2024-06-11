@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  backend-project-app:
+    container_name: backend-project-app
+    build:
+      context: ../../
+      dockerfile: dev_scripts/docker/Dockerfile
+    command: bash -c "python3 -m alembic upgrade head && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ../../:/app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      backend-project-db:
+        condition: service_healthy
+
+  backend-project-db:
+    container_name: backend-project-db
+    image: postgres:13-alpine
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB_NAME: ${DB_NAME}
+      POSTGRES_SIMPLE_USER: ${DB_USER}
+      POSTGRES_SIMPLE_USER_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB_UTEST_NAME: "postgres_user_utest"
+
+    volumes:
+      - ./initDB:/docker-entrypoint-initdb.d
+      - db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin4:
+    container_name: backend-project-pg
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "user@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "password"
+
+    volumes:
+      - pgadmin4-data:/var/lib/pgadmin
+      - ./config.json:/pgadmin4/servers.json
+
+    entrypoint:
+      - "/bin/sh"
+      - "-c"
+      - "/bin/echo '${DB_HOST}:5432:*:${DB_USER}:${DB_PASSWORD}' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
+
+    depends_on:
+      - backend-project-db
+
+volumes:
+  pgadmin4-data:
+  db-volume:
+
+networks:
+  default:
+    external: true
+    name: docker_default
+

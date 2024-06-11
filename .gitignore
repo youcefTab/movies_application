@@ -1,0 +1,30 @@
+# Ignore virtual environments
+/backend_project/venv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore VSCode settings (if using VSCode)
+.vscode/
+
+# Ignore PyCharm project-specific files
+*.iml
+*.iws
+
+# Ignore JetBrains Rider settings
+.idea/
+.idea/*
+
+# Ignore Django specific files
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.sqlite
+
+# Ignore dev environment files
+/backend_project/dev_scripts/.local.env

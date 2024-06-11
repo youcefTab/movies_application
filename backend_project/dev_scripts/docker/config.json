@@ -1,0 +1,14 @@
+{
+    "Servers": {
+      "1": {
+        "Name": "backend-project-db",
+        "Group": "Servers",
+        "Port": 5432,
+        "Username": "postgres_user",
+        "SSLMode": "prefer",
+        "PassFile": "/tmp/pgpassfile",
+        "Host": "backend-project-db",
+        "MaintenanceDB": "postgres"
+      }
+    }
+  }
