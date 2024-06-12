@@ -1,9 +1,22 @@
+"""Models.py."""
+import os
 
-from sqlalchemy import Column, DateTime, Integer, ForeignKey, String
+from sqlalchemy import Column, DateTime, Integer, ForeignKey, String, create_engine
 from datetime import datetime
-from sqlalchemy.orm import relationship, Mapped, validates, declarative_base
+from sqlalchemy.orm import relationship, Mapped, validates, declarative_base, sessionmaker, scoped_session
 from sqlalchemy.schema import CheckConstraint
 
+engine = create_engine(
+    f"postgresql+psycopg2://"
+    f"{os.environ['DB_USER']}:"
+    f"{os.environ['DB_PASSWORD']}@"
+    f"{os.environ['DB_HOST']}/"
+    f"{os.environ['DB_NAME']}"
+)
+
+_conn = engine.connect()
+
+db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
 class Base:
     """Base model class for resources."""

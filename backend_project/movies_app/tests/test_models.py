@@ -1,6 +1,6 @@
 """Test models.py."""
 import pytest
-from movies_app.models import Actor, Movie, Review  # Replace with the actual module name
+from movies_app.models import Actor, Movie, Review
 from sqlalchemy.exc import IntegrityError
 
 class TestMovieModel:

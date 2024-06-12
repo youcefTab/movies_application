@@ -42,6 +42,17 @@ INSTALLED_APPS = [
     'movies_app',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'movies_app.parsers.CamelCaseToSnakeCaseJSONParser',  # Custom parser for camelCase to snake_case
+        'rest_framework.parsers.JSONParser',  # Default JSON parser
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'movies_app.renderers.CamelCaseJSONRenderer',  # Custom renderer for snake_case to camelCase
+        'rest_framework.renderers.JSONRenderer',  # Fallback default renderer
+    ),
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
