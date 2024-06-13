@@ -11,6 +11,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_project.settings')
 django.setup()
 
+# previous part was resolved from :
+# https://stackoverflow.com/questions/59159991/modulenotfounderror-no-module-named-foo-how-can-i-import-a-model-into-a-djang
 
 # make sur to start your database and export your env variables before launching this command
 # for that use script : init_test_environment or start a docker-compose up
