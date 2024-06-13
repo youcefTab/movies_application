@@ -53,6 +53,18 @@ services:
     depends_on:
       backend-project-db:
         condition: service_healthy
+  
+  frontend-project-app:
+    container_name: frontend_project-app
+    build:
+      context: ../frontend_project
+      dockerfile: Dockerfile
+    volumes:
+      - ../frontend_project/:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend-project-app
 
 volumes:
   pgadmin4-data:
