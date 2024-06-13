@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Run this script from movies_app/backend_project folder because of the paths used in the script
+
 # Define the path to your docker-compose file
 COMPOSE_FILE_PATH="./dev_scripts/docker/docker-compose.yml"
 
