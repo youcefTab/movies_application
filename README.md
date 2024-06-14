@@ -6,6 +6,7 @@
 ```docker-compose up --build -d```
 
 ```cd ..```
+# --- USE THE BACKEND ---
 
 # Start Venv and install requirements
 
