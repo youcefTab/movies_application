@@ -9,13 +9,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     currentPage: 1,
+    pagination: {
+      nextPage: null, 
+      previousPage: null,
+    },
+    movies: [],
   },
   mutations,
   actions,
   plugins: [
     createPersistedState({
       key: 'moviesApp',
-      paths: ['currentPage']
+      paths: ['currentPage', 'pagination', 'movies']
     })
   ],
   modules: {}
